@@ -33,6 +33,7 @@ from .t5.mixin_t5 import (
     T5ModelAdaptersMixin,
 )
 from .vit.mixin_vit import ViTIntermediateAdaptersMixin, ViTModelAdaptersMixin
+from .wav2vec2.mixin_wav2vec2 import Wav2Vec2ModelAdaptersMixin
 from .whisper.mixin_whisper import (
     WhisperDecoderAdaptersMixin,
     WhisperDecoderWrapperAdaptersMixin,
@@ -102,6 +103,7 @@ MODEL_MIXIN_MAPPING = {
     "BertGenerationEncoder": BertModelAdaptersMixin,
     "BertGenerationLayer": BertLayerAdaptersMixin,
     "LlamaModel": LlamaModelAdapterMixin,
+    "Wav2Vec2Model": Wav2Vec2ModelAdaptersMixin,
     "WhisperEncoder": WhisperEncoderAdaptersMixin,
     "WhisperDecoder": WhisperDecoderAdaptersMixin,
     "WhisperModel": WhisperModelAdaptersMixin,
