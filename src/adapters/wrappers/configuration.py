@@ -69,11 +69,16 @@ CONFIG_CLASS_KEYS_MAPPING = {
     },
     "xlm_roberta": {},
 }
-SUBMODEL_NAMES = {"clip": ["vision_config", "text_config"], "encoder-decoder": ["encoder", "decoder"]}
+SUBMODEL_NAMES = {
+    "clip": ["vision_config", "text_config"],
+    "encoder-decoder": ["encoder", "decoder"],
+}
 
 
 def init_adapters_config(
-    model: PreTrainedModel, model_config: PretrainedConfig, adapters_config: Optional[ModelAdaptersConfig] = None
+    model: PreTrainedModel,
+    model_config: PretrainedConfig,
+    adapters_config: Optional[ModelAdaptersConfig] = None,
 ):
     """Initializes the adapters config object of the model to enable adapter support. Also make required changes to the
     model's config.

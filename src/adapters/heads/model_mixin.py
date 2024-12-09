@@ -21,6 +21,7 @@ from .base import (
     QuestionAnsweringHead,
     TaggingHead,
 )
+from .ctc import CTCHead
 from .dependency_parsing import BiaffineParsingHead
 from .language_modeling import BertStyleMaskedLMHead, CausalLMHead, Seq2SeqLMHead
 
@@ -38,6 +39,7 @@ MODEL_HEAD_MAP = {
     "causal_lm": CausalLMHead,
     "seq2seq_lm": Seq2SeqLMHead,
     "image_classification": ImageClassificationHead,
+    "ctc": CTCHead,
 }
 
 
@@ -488,6 +490,30 @@ class ModelWithFlexibleHeadsAdaptersMixin(ModelWithHeadsAdaptersMixin):
             overwrite_ok (bool, optional): Force overwrite if a head with the same name exists. Defaults to False.
         """
         head = Seq2SeqLMHead(self, head_name, layers=layers)
+        self.add_prediction_head(head, overwrite_ok=overwrite_ok)
+
+    @head_type("ctc")
+    def add_ctc_head(
+        self,
+        head_name,
+        vocab_size=None,
+        hidden_size=None,
+        final_dropout=None,
+        blank=None,
+        ctc_loss_reduction="sum",
+        ctc_zero_infinity=False,
+        overwrite_ok=False,
+    ):
+        head = CTCHead(
+            self,
+            head_name,
+            vocab_size=vocab_size,
+            hidden_size=hidden_size,
+            final_dropout=final_dropout,
+            blank=blank,
+            ctc_loss_reduction=ctc_loss_reduction,
+            ctc_zero_infinity=ctc_zero_infinity,
+        )
         self.add_prediction_head(head, overwrite_ok=overwrite_ok)
 
     def delete_head(self, head_name: str):

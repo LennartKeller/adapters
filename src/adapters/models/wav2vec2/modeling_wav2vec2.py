@@ -1,10 +1,10 @@
 from transformers.models.wav2vec2.modeling_wav2vec2 import Wav2Vec2EncoderLayer
 
-from ...composition import adjust_tensors_for_parallel, adjust_tensors_for_parallel_, match_attn_matrices_for_parallel
+from ...composition import adjust_tensors_for_parallel_
 from .mixin_wav2vec2 import Wav2Vec2EncoderLayerMixin
 
 
-class Wav2Vec2EncoderLayerWithAdapters(Wav2Vec2EncoderLayerMixin, Wav2Vec2EncoderLayer):
+class Wav2Vec2EncoderLayerStableLayerNormWithAdapters(Wav2Vec2EncoderLayerMixin, Wav2Vec2EncoderLayer):
 
     def forward(self, hidden_states, attention_mask=None, output_attentions=False):
         adjust_tensors_for_parallel_(hidden_states, attention_mask)
